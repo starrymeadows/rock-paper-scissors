@@ -4,8 +4,41 @@ let playerSelection = null;
 let computerSelection = null;
 let roundOutcome;
 
-// game starts
+// player selects rock, paper, scissors
+function playerChoice() {
+    playerSelection = window.prompt("Rock, paper, or scissors?");
+    playerSelection = playerSelection.toLowerCase();
+    console.log(playerSelection);
+    return playerSelection;
+}
 
+// computer randomly selects rock, paper, scissors 
+function computerPlay() {
+    computerSelection = choices[Math.floor(Math.random() * choices.length)];
+    console.log(computerSelection);
+    return computerSelection;
+}
+
+// round is played
+function playRound(playerSelection, computerSelection) {
+    if (playerSelection === computerSelection) {
+        return roundOutcome = "It's a tie!";
+    } else if ((playerSelection === "rock") && (computerSelection === "paper")) {
+        return roundOutcome = "You lose! Paper beats rock.";
+    } else if ((playerSelection === "paper") && (computerSelection === "scissors")) {
+        return roundOutcome = "You lose! Scissors beats paper.";
+    } else if ((playerSelection === "scissors") && (computerSelection === "rock")) {
+        return roundOutcome = "You lose! Rock beats scissors.";
+    } else if ((playerSelection === "rock") && (computerSelection === "scissors")) {
+        return roundOutcome = "You win! Rock beats scissors.";
+    } else if ((playerSelection === "paper") && (computerSelection === "rock")) {
+        return roundOutcome = "You win! Paper beats rock.";
+    } else {
+        return roundOutcome = "You win! Scissors beats paper.";
+    }  
+}
+
+// game starts
 function game() {
     let computerScore = 0;
     let playerScore = 0;
@@ -34,41 +67,6 @@ function game() {
     } else {
         console.log(`The score is ${playerScore} to ${computerScore}. It's a tie?!`)
     }
-}
-
-// player selects rock, paper, scissors
-function playerChoice() {
-    playerSelection = window.prompt("Rock, paper, or scissors?");
-    playerSelection = playerSelection.toLowerCase();
-    console.log(playerSelection);
-    return playerSelection;
-}
-
-// computer randomly selects rock, paper, scissors 
-
-function computerPlay() {
-    computerSelection = choices[Math.floor(Math.random() * choices.length)];
-    console.log(computerSelection);
-    return computerSelection;
-}
-
-// round is played
-function playRound(playerSelection, computerSelection) {
-    if (playerSelection === computerSelection) {
-        return roundOutcome = "It's a tie!";
-    } else if ((playerSelection === "rock") && (computerSelection === "paper")) {
-        return roundOutcome = "You lose! Paper beats rock.";
-    } else if ((playerSelection === "paper") && (computerSelection === "scissors")) {
-        return roundOutcome = "You lose! Scissors beats paper.";
-    } else if ((playerSelection === "scissors") && (computerSelection === "rock")) {
-        return roundOutcome = "You lose! Rock beats scissors.";
-    } else if ((playerSelection === "rock") && (computerSelection === "scissors")) {
-        return roundOutcome = "You win! Rock beats scissors.";
-    } else if ((playerSelection === "paper") && (computerSelection === "rock")) {
-        return roundOutcome = "You win! Paper beats rock.";
-    } else {
-        return roundOutcome = "You win! Scissors beats paper.";
-    }  
 }
 
 game();
