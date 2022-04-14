@@ -7,6 +7,10 @@ let roundOutcome;
 // player selects rock, paper, scissors
 function playerChoice() {
     playerSelection = window.prompt("Rock, paper, or scissors?");
+    if (playerSelection === null) {
+        console.log(`I guess the only real way to win is not to play...`);
+        return;
+    }
     playerSelection = playerSelection.toLowerCase();
     console.log(playerSelection);
     return playerSelection;
@@ -45,6 +49,9 @@ function game() {
     // play five rounds
     for (let i = 0; i < 5; i++) {
         playerChoice();
+        if (playerSelection === null) {
+            break;
+        }
         computerPlay();
         playRound(playerSelection, computerSelection);
         if (roundOutcome.includes("lose")) {
@@ -63,8 +70,10 @@ function game() {
         console.log(`The score is ${playerScore} to ${computerScore}. You win!`);
     } else if (computerScore > playerScore) {
         console.log(`The score is ${computerScore} to ${playerScore}. You lose!`);
+    } else if (playerSelection === null) {
+        console.log("... but seriously, you're too good for roshambo?");
     } else if (computerScore === 0 && playerScore === 0) {
-        console.log(`The score is... 0??? What was even the point...`)
+        console.log(`The score is... 0??? What was even the point...`);
     } else {
         console.log(`The score is ${playerScore} to ${computerScore}. It's a tie?!`)
     }
