@@ -1,12 +1,18 @@
 // available choices
 const choices = ["rock", "paper", "scissors"];
-const playerSelection = "rock";
+let playerSelection = null;
 let computerSelection = null;
 let gameOutcome;
 
 // game starts
 
 // player selects rock, paper, scissors
+function playerChoice() {
+    playerSelection = window.prompt("Rock, paper, or scissors?");
+    return playerSelection = playerSelection.toLowerCase();
+}
+
+console.log(playerChoice());
 
 // computer randomly selects rock, paper, scissors 
 
@@ -33,8 +39,6 @@ function playRound(playerSelection, computerSelection) {
         return gameOutcome = "You win! Scissors beats paper.";
     }  
 }
-
-
 
 console.log(playRound(playerSelection, computerSelection));
 
