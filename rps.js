@@ -10,6 +10,7 @@ function game() {
     let computerScore = 0;
     let playerScore = 0;
 
+    // play five rounds
     for (let i = 0; i < 5; i++) {
         playerChoice();
         computerPlay();
@@ -20,9 +21,12 @@ function game() {
         } else if (roundOutcome.includes("win")) {
             playerScore++;
             console.log(roundOutcome);
+        } else {
+            console.log(roundOutcome);
         }
     }
 
+    // announce and determine winner
     if (playerScore > computerScore) {
         console.log(`The score is ${playerScore} to ${computerScore}. You win!`);
     } else if (computerScore > playerScore) {
@@ -47,7 +51,6 @@ function computerPlay() {
     console.log(computerSelection);
     return computerSelection;
 }
-console.log(computerPlay());
 
 // round is played
 function playRound(playerSelection, computerSelection) {
