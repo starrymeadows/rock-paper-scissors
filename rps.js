@@ -31,7 +31,9 @@ function playRound(playerSelection, computerSelection) {
         case ((playerSelection === "rock") && (computerSelection === "scissors")):
         case ((playerSelection === "paper") && (computerSelection === "rock")):
         case ((playerSelection === "scissors") && (computerSelection === "paper")):    
-        return roundOutcome = `You win! ${playerSelection} beats ${computerSelection}.`;
+            return roundOutcome = `You win! ${playerSelection} beats ${computerSelection}.`;
+        default:
+            return roundOutcome = `${playerSelection} is not a rock, a paper, or a scissors. :( Null round!`;
     }  
 }
 
@@ -61,6 +63,8 @@ function game() {
         console.log(`The score is ${playerScore} to ${computerScore}. You win!`);
     } else if (computerScore > playerScore) {
         console.log(`The score is ${computerScore} to ${playerScore}. You lose!`);
+    } else if (computerScore === 0 && playerScore === 0) {
+        console.log(`The score is... 0??? What was even the point...`)
     } else {
         console.log(`The score is ${playerScore} to ${computerScore}. It's a tie?!`)
     }
