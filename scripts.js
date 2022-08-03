@@ -4,7 +4,6 @@ let playerSelection = null;
 let computerSelection = null;
 let computerScore = 0;
 let playerScore = 0;
-let roundNumber = 0;
 let roundOutcome;
 
 const pScore = document.querySelector('.player-score');
@@ -72,14 +71,11 @@ function playRound(playerSelection, computerSelection) {
 function game(roundOutcome) {
     if (roundOutcome.includes("lose")) {
         computerScore++;
-        roundNumber++;
         outcome.textContent = roundOutcome;
     } else if (roundOutcome.includes("win")) {
         playerScore++;
-        roundNumber++;
         outcome.textContent = roundOutcome;
     } else {
-        roundNumber++;
         outcome.textContent = roundOutcome;
     }
     
@@ -87,7 +83,7 @@ function game(roundOutcome) {
     cScore.textContent = `Computer: ${computerScore}`;
 
     // announce and determine winner
-    if (roundNumber === 5) {
+    if (playerScore === 5 || computerScore === 5) {
         const buttons = document.querySelectorAll('button');
         buttons.forEach((button) => {
             button.disabled = true;
@@ -95,16 +91,13 @@ function game(roundOutcome) {
 
         if (playerScore > computerScore) {
             results.textContent = `You've won it all!`;
-        } else if (computerScore > playerScore) {
-            results.textContent = `You've lost it all!`;
         } else {
-            results.textContent = `It's a tie?!`;
+            results.textContent = `You've lost it all!`;
         }
 
         const replay = document.createElement('button');
         replay.textContent = "Play again?";
         replay.addEventListener('click', () => {
-            roundNumber = 0;
             playerScore = 0;
             computerScore = 0;
             buttons.forEach((button) => {
