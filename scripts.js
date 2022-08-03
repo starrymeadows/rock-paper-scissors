@@ -11,6 +11,7 @@ const pScore = document.querySelector('.player-score');
 const cScore = document.querySelector('.computer-score');
 const outcome = document.querySelector('.outcome');
 const results = document.querySelector('.results');
+const content = document.querySelector('.content');
 
 const rock = document.querySelector('.rock-button');
 const paper = document.querySelector('.paper-button');
@@ -99,6 +100,25 @@ function game(roundOutcome) {
         } else {
             results.textContent = `It's a tie?!`;
         }
+
+        const replay = document.createElement('button');
+        replay.textContent = "Play again?";
+        replay.addEventListener('click', () => {
+            roundNumber = 0;
+            playerScore = 0;
+            computerScore = 0;
+            buttons.forEach((button) => {
+                button.disabled = false;
+            });
+
+            const text = document.querySelectorAll('p');
+            text.forEach((p) => {
+                p.textContent = "";
+            });
+            content.removeChild(replay);
+        });
+
+        content.appendChild(replay);
     }
     
 }
