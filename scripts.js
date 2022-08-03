@@ -7,9 +7,10 @@ let playerScore = 0;
 let roundNumber = 0;
 let roundOutcome;
 
-const score = document.querySelector('.score');
+const pScore = document.querySelector('.player-score');
+const cScore = document.querySelector('.computer-score');
 const outcome = document.querySelector('.outcome');
-const result = document.querySelector('.result');
+const results = document.querySelector('.results');
 
 const rock = document.querySelector('.rock-button');
 const paper = document.querySelector('.paper-button');
@@ -81,14 +82,23 @@ function game(roundOutcome) {
         outcome.textContent = roundOutcome;
     }
     
-    score.textContent = `The score is ${playerScore} to ${computerScore}.`
+    pScore.textContent = `You: ${playerScore}`;
+    cScore.textContent = `Computer: ${computerScore}`;
 
     // announce and determine winner
-    if (playerScore > computerScore) {
-        results.textContent = `The score is ${playerScore} to ${computerScore}. You win!`;
-    } else if (computerScore > playerScore) {
-        results.textContent = `The score is ${computerScore} to ${playerScore}. You lose!`;
-    } else {
-        console.log(`The score is ${playerScore} to ${computerScore}. It's a tie?!`)
+    if (roundNumber === 5) {
+        const buttons = document.querySelectorAll('button');
+        buttons.forEach((button) => {
+            button.disabled = true;
+        });
+
+        if (playerScore > computerScore) {
+            results.textContent = `You've won it all!`;
+        } else if (computerScore > playerScore) {
+            results.textContent = `You've lost it all!`;
+        } else {
+            results.textContent = `It's a tie?!`;
+        }
     }
+    
 }
