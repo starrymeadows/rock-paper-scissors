@@ -46,24 +46,6 @@ function game() {
     let computerScore = 0;
     let playerScore = 0;
 
-    // play five rounds
-    for (let i = 0; i < 5; i++) {
-        playerChoice();
-        if (playerSelection === null) {
-            break;
-        }
-        computerPlay();
-        playRound(playerSelection, computerSelection);
-        if (roundOutcome.includes("lose")) {
-            computerScore++;
-            console.log(roundOutcome);
-        } else if (roundOutcome.includes("win")) {
-            playerScore++;
-            console.log(roundOutcome);
-        } else {
-            console.log(roundOutcome);
-        }
-    }
 
     // announce and determine winner
     if (playerScore > computerScore) {
