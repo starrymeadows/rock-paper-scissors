@@ -2,19 +2,44 @@
 const choices = ["rock", "paper", "scissors"];
 let playerSelection = null;
 let computerSelection = null;
+let computerScore = 0;
+let playerScore = 0;
+let roundNumber = 0;
 let roundOutcome;
 
+const score = document.querySelector('.score');
+const outcome = document.querySelector('.outcome');
+const result = document.querySelector('.result');
+
+const rock = document.querySelector('.rock-button');
+const paper = document.querySelector('.paper-button');
+const scissors = document.querySelector('.scissors-button');
+
+
 // player selects rock, paper, scissors
-function playerChoice() {
-    playerSelection = window.prompt("Rock, paper, or scissors?");
-    if (playerSelection === null) {
-        console.log(`I guess the only real way to win is not to play...`);
-        return;
-    }
-    playerSelection = playerSelection.toLowerCase();
-    console.log(playerSelection);
-    return playerSelection;
-}
+rock.addEventListener('click', () => {
+    console.log("rock");
+    playerSelection = 'rock';
+    computerPlay();
+    playRound(playerSelection, computerSelection);
+    game(roundOutcome);
+})
+
+paper.addEventListener('click', () => {
+    console.log("paper");
+    playerSelection = 'paper';
+    computerPlay();
+    playRound('paper', computerSelection);
+    game(roundOutcome);
+})
+
+scissors.addEventListener('click', () => {
+    console.log("scissors");
+    playerSelection = 'scissors';
+    computerPlay();
+    playRound('scissors', computerSelection);
+    game(roundOutcome);
+})
 
 // computer randomly selects rock, paper, scissors 
 function computerPlay() {
@@ -42,23 +67,28 @@ function playRound(playerSelection, computerSelection) {
 }
 
 // game starts
-function game() {
-    let computerScore = 0;
-    let playerScore = 0;
-
+function game(roundOutcome) {
+    if (roundOutcome.includes("lose")) {
+        computerScore++;
+        roundNumber++;
+        outcome.textContent = roundOutcome;
+    } else if (roundOutcome.includes("win")) {
+        playerScore++;
+        roundNumber++;
+        outcome.textContent = roundOutcome;
+    } else {
+        roundNumber++;
+        outcome.textContent = roundOutcome;
+    }
+    
+    score.textContent = `The score is ${playerScore} to ${computerScore}.`
 
     // announce and determine winner
     if (playerScore > computerScore) {
-        console.log(`The score is ${playerScore} to ${computerScore}. You win!`);
+        results.textContent = `The score is ${playerScore} to ${computerScore}. You win!`;
     } else if (computerScore > playerScore) {
-        console.log(`The score is ${computerScore} to ${playerScore}. You lose!`);
-    } else if (playerSelection === null) {
-        console.log("... but seriously, you're too good for roshambo?");
-    } else if (computerScore === 0 && playerScore === 0) {
-        console.log(`The score is... 0??? What was even the point...`);
+        results.textContent = `The score is ${computerScore} to ${playerScore}. You lose!`;
     } else {
         console.log(`The score is ${playerScore} to ${computerScore}. It's a tie?!`)
     }
 }
-
-game();
