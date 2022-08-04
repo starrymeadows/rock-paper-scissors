@@ -1,55 +1,20 @@
-// available choices
-const choices = ["rock", "paper", "scissors"];
+// game logic
 let playerSelection = null;
 let computerSelection = null;
 let computerScore = 0;
 let playerScore = 0;
-let roundOutcome;
-
-const pScore = document.querySelector('.player-score');
-const cScore = document.querySelector('.computer-score');
-const outcome = document.querySelector('.outcome');
-const results = document.querySelector('.results');
-const content = document.querySelector('.content');
-
-const rock = document.querySelector('.rock-button');
-const paper = document.querySelector('.paper-button');
-const scissors = document.querySelector('.scissors-button');
-
-
-// player selects rock, paper, scissors
-rock.addEventListener('click', () => {
-    console.log("rock");
-    playerSelection = 'rock';
-    computerPlay();
-    playRound(playerSelection, computerSelection);
-    game(roundOutcome);
-})
-
-paper.addEventListener('click', () => {
-    console.log("paper");
-    playerSelection = 'paper';
-    computerPlay();
-    playRound('paper', computerSelection);
-    game(roundOutcome);
-})
-
-scissors.addEventListener('click', () => {
-    console.log("scissors");
-    playerSelection = 'scissors';
-    computerPlay();
-    playRound('scissors', computerSelection);
-    game(roundOutcome);
-})
+let roundOutcome = ' ';
 
 // computer randomly selects rock, paper, scissors 
 function computerPlay() {
+    const choices = ["rock", "paper", "scissors"];
+
     computerSelection = choices[Math.floor(Math.random() * choices.length)];
     console.log(computerSelection);
     return computerSelection;
 }
 
-// round is played
+// round is playeddd
 function playRound(playerSelection, computerSelection) {
     switch (true) {
         case (playerSelection === computerSelection):
@@ -62,13 +27,10 @@ function playRound(playerSelection, computerSelection) {
         case ((playerSelection === "paper") && (computerSelection === "rock")):
         case ((playerSelection === "scissors") && (computerSelection === "paper")):    
             return roundOutcome = `You win! ${playerSelection} beats ${computerSelection}.`;
-        default:
-            return roundOutcome = `${playerSelection} is not a rock, a paper, or a scissors. :( Null round!`;
     }  
 }
 
-// game starts
-function game(roundOutcome) {
+function updateScore(roundOutcome) {
     if (roundOutcome.includes("lose")) {
         computerScore++;
         outcome.textContent = roundOutcome;
@@ -81,37 +43,73 @@ function game(roundOutcome) {
     
     pScore.textContent = `You: ${playerScore}`;
     cScore.textContent = `Computer: ${computerScore}`;
+}
 
-    // announce and determine winner
-    if (playerScore === 5 || computerScore === 5) {
-        const buttons = document.querySelectorAll('button');
-        buttons.forEach((button) => {
-            button.disabled = true;
-        });
+function isGameOver() {
+    return (playerScore === 5 || computerScore === 5);
+}
 
-        if (playerScore > computerScore) {
-            results.textContent = `You've won it all!`;
-        } else {
-            results.textContent = `You've lost it all!`;
-        }
+function endGame() {
+    const buttons = document.querySelectorAll('button');
+    buttons.forEach((button) => {
+        button.disabled = true;
+    });
 
-        const replay = document.createElement('button');
-        replay.textContent = "Play again?";
-        replay.addEventListener('click', () => {
-            playerScore = 0;
-            computerScore = 0;
-            buttons.forEach((button) => {
-                button.disabled = false;
-            });
-
-            const text = document.querySelectorAll('p');
-            text.forEach((p) => {
-                p.textContent = "";
-            });
-            content.removeChild(replay);
-        });
-
-        content.appendChild(replay);
+    if (playerScore > computerScore) {
+        results.textContent = `You've won it all!`;
+    } else {
+        results.textContent = `You've lost it all!`;
     }
+
+    addReplay();
+}
+
+// UI
+const pScore = document.querySelector('.player-score');
+const cScore = document.querySelector('.computer-score');
+const outcome = document.querySelector('.outcome');
+const results = document.querySelector('.results');
+const content = document.querySelector('.content');
+
+const rockBtn = document.querySelector('.rock-button');
+const paperBtn = document.querySelector('.paper-button');
+const scissorsBtn = document.querySelector('.scissors-button');
+
+const replay = document.createElement('button');
+replay.textContent = "Play again?";
+replay.addEventListener('click', restartGame);
+
+// player selects rock, paper, scissors
+rockBtn.addEventListener('click', () => handleClick('rock'));
+paperBtn.addEventListener('click', () => handleClick('paper'));
+scissorsBtn.addEventListener('click', () => handleClick('scissors'));
+
+function handleClick(choice) {
+    playerSelection = choice;
+    console.log(playerSelection);
+    computerPlay();
+    playRound(playerSelection, computerSelection);
+    updateScore(roundOutcome);
+    if (isGameOver()) {
+        endGame();
+    }
+}
+
+function addReplay() {
+    content.appendChild(replay);
+}
     
+function restartGame() {
+    playerScore = 0;
+    computerScore = 0;
+    const buttons = document.querySelectorAll('button');
+    buttons.forEach((button) => {
+        button.disabled = false;
+    });
+
+    const text = document.querySelectorAll('p');
+        text.forEach((p) => {
+            p.textContent = "";
+        });
+        content.removeChild(replay);
 }
