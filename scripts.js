@@ -10,7 +10,6 @@ function computerPlay() {
     const choices = ["rock", "paper", "scissors"];
 
     computerSelection = choices[Math.floor(Math.random() * choices.length)];
-    console.log(computerSelection);
     return computerSelection;
 }
 
@@ -86,7 +85,6 @@ scissorsBtn.addEventListener('click', () => handleClick('scissors'));
 
 function handleClick(choice) {
     playerSelection = choice;
-    console.log(playerSelection);
     computerPlay();
     playRound(playerSelection, computerSelection);
     updateScore(roundOutcome);
