@@ -1,20 +1,27 @@
-# Project: Console Rock, Paper, Scissors
+# Project: Rock, Paper, Scissors
 
 ## Description
 
-Project 3 in Foundations for [The Odin Project](https://www.theodinproject.com/). This is my first **JS** project.
+Project 3 in Foundations for [The Odin Project](https://www.theodinproject.com/). This is my first **HTML/JS** project.
 
-Five rounds are played, each prompting user input and a randomized choice from the computer. At the end of the five rounds, points are tallied and a winner is declared.
+Players submit inputs via buttons, which are put against the computer's randomized choice. First to five points is declared winner.
 
 ### Benefits
+
+#### First iteration
 
 - Furthered understanding of functions
 - Provided familiarity with the console & debugging process
 
+#### Second iteration
+
+- Established foundation of DOM Manipulation
+- Further improved debugging process
+
 ## Improvements
 
-As this project is meant to be revisited, there are several issues in its current form. These include (but are not necessarily limited to):
-- an inability to replay outside of refreshing the page
-- and, of course, a complete lack of GUI
+Currently, the game is totally functional, but quite ugly! Further improvements might include:
+- More interesting theming
+- Use of CSS
 
 Additionally, as a first pass at Javascript, this code can certainly be cleaned up. I have already made one brief attempt at this after checking other submitted solutions: rather than redundant if...else statements and handwriting each round outcome, a switch statement with template literals makes for cleaner code.
